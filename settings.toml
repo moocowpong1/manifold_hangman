@@ -1,0 +1,7 @@
+evil_exponent = 2.0
+evil_factor = 1.5
+word_list_path = "words.txt"
+exclusions_list_path = "exclusions.txt"
+salt_file_path = "salt.toml"
+history_path = "history.toml"
+verbose = true
