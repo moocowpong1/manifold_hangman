@@ -16,9 +16,9 @@ struct SeedSalt {
 impl SeedSalt {
     fn from_file(path: &str) -> u64 {
         let content = fs::read_to_string(path)
-            .expect("Failed to read seed file");
+            .expect("Failed to read seed salt file");
         let sd: SeedSalt = toml::from_str(&content)
-            .expect("Failed to parse seed file");
+            .expect("Failed to parse seed salt file");
 
         sd.salt
     }
@@ -68,7 +68,7 @@ fn read_word_list(word_path: &str, exclusions_path: &str) -> Vec<String> {
 
 fn main() {
     let settings = Settings::from_file(SETTINGS_PATH);
-    let word_list = read_word_list(&settings.word_list_path, &settings.word_list_path);
+    let word_list = read_word_list(&settings.word_list_path, &settings.exclusions_list_path);
     let rng_salt = SeedSalt::from_file(&settings.salt_file_path);
     let history = History::from_file(&settings.history_path);
     hangman::play_game(word_list, history, &settings, rng_salt)
